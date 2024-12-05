@@ -1,0 +1,18 @@
+[package]
+name = "len_trait"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+cfg-if = "1.0.0"
+
+
+[features]
+hashbrown = ["dep:hashbrown"]
+heapless = ["dep:heapless"]
+smallvec = ["dep:smallvec"]
+compact_str = ["dep:compact_str"]
+ndarray = ["dep:ndarray"]
+rangemap = ["dep:rangemap"]
+bstr = ["dep:bstr"]
+indexmap = ["dep:indexmap"]
