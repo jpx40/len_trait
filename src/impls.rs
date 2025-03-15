@@ -263,98 +263,98 @@ use std::boxed::Box;
         do_impl!(Len for HashSet, HashSet<T>; T: Eq + Hash);
         do_impl!(Clear for HashSet, HashSet<T>; T: Eq + Hash);
         do_impl!(inexact CapacityMut for HashSet, HashSet<T>; T: Eq + Hash);
-cfg_if::cfg_if! {
-            if #[cfg(feature = indexmap)] {
-            do_impl!(Len for indexmap::HashSet, indexmap::HashSet<T>; T: Eq + Hash);
-            do_impl!(Clear for indexmap::HashSet, indexmap::HashSet<T>; T: Eq + Hash);
-            do_impl!(inexact CapacityMut for indexmap::HashSet, indexmap::HashSet<T>; T: Eq + Hash);
-            do_impl!(Len for indexmap::IndexMap, indexmap::IndexMap<K, V>; K: Eq + Hash, V);
-            do_impl!(Clear for indexmap::IndexMap, indexmap::IndexMap<K, V>; K: Eq + Hash, V);
-            do_impl!(inexact CapacityMut for indexmap::IndexMap, indexmap::IndexMap<K, V>; K: Eq + Hash, V);  
-        }
-}
-cfg_if::cfg_if! {
-    if #[cfg(feature = hashbrown)] {
-    do_impl!(Len for hashbrown::HashSet, hashbrown::HashSet<T>; T: Eq + Hash);
-    do_impl!(Clear for hashbrown::HashSet, hashbrown::HashSet<T>; T: Eq + Hash);
-    do_impl!(inexact CapacityMut for hashbrown::HashSet, hashbrown::HashSet<T>; T: Eq + Hash);
-    do_impl!(Len for hashbrown::HashMap, hashbrown::HashMap<K, V>; K: Eq + Hash, V);
-    do_impl!(Clear for hashbrown::HashMap, hashbrown::HashMap<K, V>; K: Eq + Hash, V);
-    do_impl!(inexact CapacityMut for hashbrown::HashMap, hashbrown::HashMap<K, V>; K: Eq + Hash, V);  
-}
-}
-cfg_if::cfg_if! {
-    if #[cfg(feature = rangemap)] {
-    do_impl!(Len for rangemap::RangeSet, rangemap::RangeSet<T>; T: Eq + Hash);
-    do_impl!(Clear for rangemap::RangeSet, rangemap::RangeSet<T>; T: Eq + Hash);
-    do_impl!(inexact CapacityMut for rangemap::RangeSet,  rangemap::RangeSet<T>; T: Eq + Hash);
-    do_impl!(Len for rangemap:: RangeInclusiveSet, rangemap:: RangeInclusiveSet<T>; T: Eq + Hash);
-    do_impl!(Clear for rangemap:: RangeInclusiveSet, rangemap:: RangeInclusiveSet<T>; T: Eq + Hash);
-    do_impl!(inexact CapacityMut for rangemap:: RangeInclusiveSet,  rangemap:: RangeInclusiveSet<T>; T: Eq + Hash);
-    do_impl!(Len for rangemap::RangeMap, rangemap::RangeMap<K, V>; K: Eq + Hash, V);
-    do_impl!(Clear for rangemap::RangeMap, rangemap::RangeMap<K, V>; K: Eq + Hash, V);
-    do_impl!(inexact CapacityMut for rangemap::RangeMap, rangemap::RangeMap<K, V>; K: Eq + Hash, V);
-    do_impl!(Len for rangemap::RangeInclusiveMap, rangemap::RangeInclusiveMap<K, V>; K: Eq + Hash, V);
-    do_impl!(Clear for rangemap::RangeInclusiveMap, rangemap::RangeInclusiveMap<K, V>; K: Eq + Hash, V);
-    do_impl!(inexact CapacityMut for rangemap::RangeInclusiveMap, rangemap::RangeInclusiveMap<K, V>; K: Eq + Hash, V);
-}
-}
-cfg_if::cfg_if! {
-    if #[cfg(feature = compact_str)] {
+// cfg_if::cfg_if! {
+//             if #[cfg(feature = indexmap)] {
+//             do_impl!(Len for indexmap::HashSet, indexmap::HashSet<T>; T: Eq + Hash);
+//             do_impl!(Clear for indexmap::HashSet, indexmap::HashSet<T>; T: Eq + Hash);
+//             do_impl!(inexact CapacityMut for indexmap::HashSet, indexmap::HashSet<T>; T: Eq + Hash);
+//             do_impl!(Len for indexmap::IndexMap, indexmap::IndexMap<K, V>; K: Eq + Hash, V);
+//             do_impl!(Clear for indexmap::IndexMap, indexmap::IndexMap<K, V>; K: Eq + Hash, V);
+//             do_impl!(inexact CapacityMut for indexmap::IndexMap, indexmap::IndexMap<K, V>; K: Eq + Hash, V);  
+//         }
+// }
+// cfg_if::cfg_if! {
+//     if #[cfg(feature = hashbrown)] {
+//     do_impl!(Len for hashbrown::HashSet, hashbrown::HashSet<T>; T: Eq + Hash);
+//     do_impl!(Clear for hashbrown::HashSet, hashbrown::HashSet<T>; T: Eq + Hash);
+//     do_impl!(inexact CapacityMut for hashbrown::HashSet, hashbrown::HashSet<T>; T: Eq + Hash);
+//     do_impl!(Len for hashbrown::HashMap, hashbrown::HashMap<K, V>; K: Eq + Hash, V);
+//     do_impl!(Clear for hashbrown::HashMap, hashbrown::HashMap<K, V>; K: Eq + Hash, V);
+//     do_impl!(inexact CapacityMut for hashbrown::HashMap, hashbrown::HashMap<K, V>; K: Eq + Hash, V);  
+// }
+// }
+// cfg_if::cfg_if! {
+//     if #[cfg(feature = rangemap)] {
+//     do_impl!(Len for rangemap::RangeSet, rangemap::RangeSet<T>; T: Eq + Hash);
+//     do_impl!(Clear for rangemap::RangeSet, rangemap::RangeSet<T>; T: Eq + Hash);
+//     do_impl!(inexact CapacityMut for rangemap::RangeSet,  rangemap::RangeSet<T>; T: Eq + Hash);
+//     do_impl!(Len for rangemap:: RangeInclusiveSet, rangemap:: RangeInclusiveSet<T>; T: Eq + Hash);
+//     do_impl!(Clear for rangemap:: RangeInclusiveSet, rangemap:: RangeInclusiveSet<T>; T: Eq + Hash);
+//     do_impl!(inexact CapacityMut for rangemap:: RangeInclusiveSet,  rangemap:: RangeInclusiveSet<T>; T: Eq + Hash);
+//     do_impl!(Len for rangemap::RangeMap, rangemap::RangeMap<K, V>; K: Eq + Hash, V);
+//     do_impl!(Clear for rangemap::RangeMap, rangemap::RangeMap<K, V>; K: Eq + Hash, V);
+//     do_impl!(inexact CapacityMut for rangemap::RangeMap, rangemap::RangeMap<K, V>; K: Eq + Hash, V);
+//     do_impl!(Len for rangemap::RangeInclusiveMap, rangemap::RangeInclusiveMap<K, V>; K: Eq + Hash, V);
+//     do_impl!(Clear for rangemap::RangeInclusiveMap, rangemap::RangeInclusiveMap<K, V>; K: Eq + Hash, V);
+//     do_impl!(inexact CapacityMut for rangemap::RangeInclusiveMap, rangemap::RangeInclusiveMap<K, V>; K: Eq + Hash, V);
+// }
+// }
+// cfg_if::cfg_if! {
+//     if #[cfg(feature = compact_str)] {
         
         
-        do_impl!(Len for compact_str::CompactString;);
-        do_impl!(Clear for compact_str::CompactString;);
-        do_impl!(inexact CapacityMut for compact_str::CompactString;);
+//         do_impl!(Len for compact_str::CompactString;);
+//         do_impl!(Clear for compact_str::CompactString;);
+//         do_impl!(inexact CapacityMut for compact_str::CompactString;);
    
 
-}
-}
+// }
+// }
 
-cfg_if::cfg_if! {
-    if #[cfg(feature = ndarray)] {
-    do_impl!(Len for ndarray::ArrayBase, ndarray::ArrayBase<S, D>; );
-    do_impl!(Clear for ndarray::ArrayBase, ndarray::ArrayBase<S, D>; );
-    do_impl!(inexact CapacityMut for ndarray::ArrayBase, ndarray::ArrayBase<S, D>;);
+// cfg_if::cfg_if! {
+//     if #[cfg(feature = ndarray)] {
+//     do_impl!(Len for ndarray::ArrayBase, ndarray::ArrayBase<S, D>; );
+//     do_impl!(Clear for ndarray::ArrayBase, ndarray::ArrayBase<S, D>; );
+//     do_impl!(inexact CapacityMut for ndarray::ArrayBase, ndarray::ArrayBase<S, D>;);
     
-    }
-}
-cfg_if::cfg_if! {
-    if #[cfg(feature =  smallvec)] {
-    do_impl!(Len for  smallvec::SmallVec, SmallVec<A: Array>; );
-    do_impl!(Clear for  smallvec::SmallVec,  SmallVec<A: Array>; );
-    do_impl!(inexact CapacityMut for  smallvec::SmallVec,  SmallVec<A: Array>;);
+//     }
+// }
+// cfg_if::cfg_if! {
+//     if #[cfg(feature =  smallvec)] {
+//     do_impl!(Len for  smallvec::SmallVec, SmallVec<A: Array>; );
+//     do_impl!(Clear for  smallvec::SmallVec,  SmallVec<A: Array>; );
+//     do_impl!(inexact CapacityMut for  smallvec::SmallVec,  SmallVec<A: Array>;);
     
-    }
-}
-cfg_if::cfg_if! {
-    if #[cfg(feature =  bstr)] {
-    do_impl!(Len for  bstr::BString; );
-    do_impl!(Clear for   bstr::BString; );
-    do_impl!(inexact CapacityMut for  bstr::BString;);
+//     }
+// }
+// cfg_if::cfg_if! {
+//     if #[cfg(feature =  bstr)] {
+//     do_impl!(Len for  bstr::BString; );
+//     do_impl!(Clear for   bstr::BString; );
+//     do_impl!(inexact CapacityMut for  bstr::BString;);
     
-    }
-}
-cfg_if::cfg_if! {
-    if #[cfg(feature = heapless)] {
-    do_impl!(Len for heapless::Vec, heapless::Vec<T>; );
-    do_impl!(Clear for heapless::Vec, heapless::Vec<T>; );
-    do_impl!(inexact CapacityMut for heapless::Vec, heapless::Vec<T>;);
-    do_impl!(Len for heapless::Deque, heapless::Deque<T>; );
-    do_impl!(Clear for heapless::Deque, heapless::Deque<T>; );
-    do_impl!(inexact CapacityMut for heapless::Deque, heapless::Deque<T>;);
-    do_impl!(Len for heapless::LinearMap, heapless::LinearMap<K, V>; K: Eq + Hash, V);
-    do_impl!(Clear for heapless::LinearMap, heapless::LinearMap<K, V>; K: Eq + Hash, V);
-    do_impl!(inexact CapacityMut for heapless::LinearMap, heapless::LinearMap<K, V>; K: Eq + Hash, V);
-    do_impl!(Len for heapless::IndexMap, heapless::IndexMap<K, V>; K: Eq + Hash, V);
-    do_impl!(Clear for heapless::IndexMap, heapless::IndexMap<K, V>; K: Eq + Hash, V);
-    do_impl!(inexact CapacityMut for heapless::IndexMap, heapless::IndexMap<K, V>; K: Eq + Hash, V);
-    do_impl!(Len for heapless::IndexSet, heapless::IndexSet<T>; K: Eq + Hash, V);
-    do_impl!(Clear for heapless::IndexSet, heapless::IndexSet<T>; K: Eq + Hash, V);
-    do_impl!(inexact CapacityMut for heapless::IndexSet, heapless::IndexSet<T>; K: Eq + Hash, V);
-    do_impl!(Len for heapless::String;);
-    do_impl!(Clear for heapless::String;);
-    do_impl!(inexact CapacityMut for heapless::String;);
+//     }
+// }
+// cfg_if::cfg_if! {
+//     if #[cfg(feature = heapless)] {
+//     do_impl!(Len for heapless::Vec, heapless::Vec<T>; );
+//     do_impl!(Clear for heapless::Vec, heapless::Vec<T>; );
+//     do_impl!(inexact CapacityMut for heapless::Vec, heapless::Vec<T>;);
+//     do_impl!(Len for heapless::Deque, heapless::Deque<T>; );
+//     do_impl!(Clear for heapless::Deque, heapless::Deque<T>; );
+//     do_impl!(inexact CapacityMut for heapless::Deque, heapless::Deque<T>;);
+//     do_impl!(Len for heapless::LinearMap, heapless::LinearMap<K, V>; K: Eq + Hash, V);
+//     do_impl!(Clear for heapless::LinearMap, heapless::LinearMap<K, V>; K: Eq + Hash, V);
+//     do_impl!(inexact CapacityMut for heapless::LinearMap, heapless::LinearMap<K, V>; K: Eq + Hash, V);
+//     do_impl!(Len for heapless::IndexMap, heapless::IndexMap<K, V>; K: Eq + Hash, V);
+//     do_impl!(Clear for heapless::IndexMap, heapless::IndexMap<K, V>; K: Eq + Hash, V);
+//     do_impl!(inexact CapacityMut for heapless::IndexMap, heapless::IndexMap<K, V>; K: Eq + Hash, V);
+//     do_impl!(Len for heapless::IndexSet, heapless::IndexSet<T>; K: Eq + Hash, V);
+//     do_impl!(Clear for heapless::IndexSet, heapless::IndexSet<T>; K: Eq + Hash, V);
+//     do_impl!(inexact CapacityMut for heapless::IndexSet, heapless::IndexSet<T>; K: Eq + Hash, V);
+//     do_impl!(Len for heapless::String;);
+//     do_impl!(Clear for heapless::String;);
+//     do_impl!(inexact CapacityMut for heapless::String;);
 
-}
-}
+// }
+// }
